@@ -195,10 +195,10 @@ module Roadie
         port     = url_options[:port] || host_url.port
         
         URI::Generic.build({
-          :scheme => url_options[:protocol] || 'http',
-          :host => url_options[:host],
-          :port => (port ? port.to_i : nil),
-          :path => base_path
+          scheme: url_options[:protocol] || 'http',
+          host:   host,
+          port:   (port ? port.to_i : nil),
+          path:   base_path
         })
       end
 
