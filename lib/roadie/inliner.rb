@@ -186,7 +186,14 @@ module Roadie
 
       def absolute_url_base(base_path)
         return nil unless url_options
-        port = url_options[:port]
+        protocol = url_options[:protocol] || 'http'
+        # default_url_options is pretty effed up and will pass the subdomain and the port
+        # into [:host]. So we need to parse that out and get the elements.
+        host_url = URI.parse( "#{protocol}://#{url_options[:host]}" )
+
+        host     = host_url.host
+        port     = url_options[:port] || host_url.port
+        
         URI::Generic.build({
           :scheme => url_options[:protocol] || 'http',
           :host => url_options[:host],
